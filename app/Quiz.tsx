@@ -21,7 +21,7 @@ export default function Quiz() {
     }, [checkedItems]);
 
     return (
-        <div className="bg-quiz-background min-h-screen pb-20 text-light-pink">
+        <div className="bg-quiz-background min-h-screen pb-20 text-quiz-text">
             <header className="fixed top-0 left-0 right-0 bg-quiz-highlight text-white p-4 z-10 shadow-md transition-all duration-300 ease-in-out">
                 <div className="max-w-4xl mx-auto flex justify-between items-center">
                     <div className="w-1/3"></div> {/* Spacer */}
@@ -38,24 +38,26 @@ export default function Quiz() {
 
             <main className="pt-24 px-4 max-w-2xl mx-auto">
                 <p className="text-center italic mb-6">
-                    The Purity Test has long been a tradition, bridging the gap between O-week and the real college experience at Rice. It’s a voluntary way for O-week groups to connect and for students to reflect on how their experiences evolve throughout their time in college.
+                    The Purity Test has long been a tradition, bridging the gap between O-week and the real college experience at Rice. It's a voluntary way for O-week groups to connect and for students to reflect on how their experiences evolve throughout their time in college.
                 </p>
                 <p className="text-center italic mb-6">
-                    Click on every experience you’ve had. MPS refers to Member of the Preferred Sex.
+                    Click on every experience you've had. MPS refers to Member of the Preferred Sex.
                 </p>
                 <p className="text-center italic mb-6">
                     Note: This is not a bucket list. Attempting to complete every item on this test could have serious, even fatal, consequences.
                 </p>
+
                 <div className="space-y-4">
                     {questions.map((question, index) => (
                         <div
                             key={index}
                             className={`
-                border-2 rounded-lg p-4 cursor-pointer transition-all duration-200
-                ${checkedItems[index]
-                                    ? 'border-quiz-accent bg-quiz-background shadow-inner text-quiz-text'
-                                    : 'border-quiz-text bg-quiz-text text-quiz-background hover:shadow-md'}
-              `}
+                                rounded-lg p-4 cursor-pointer transition-all duration-200
+                                ${checkedItems[index]
+                                    ? 'bg-quiz-background text-quiz-text shadow-quiz-checked'
+                                    : 'bg-quiz-text text-quiz-background shadow-quiz-unchecked hover:shadow-quiz-unchecked-hover'
+                                }
+                            `}
                             onClick={() => handleCheck(index)}
                         >
                             <div className="flex items-center">
