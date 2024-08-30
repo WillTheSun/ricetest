@@ -8,16 +8,22 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        'quiz-background': '#2C003E',
-        'quiz-text': '#FFCDD2',
-        'quiz-accent': '#FF4500',
-        'quiz-highlight': '#A42B73',
+      backgroundColor: {
+        'quiz-background': '#F5F5F5', // Off-white background
+        'quiz-button-unchecked': '#FEE2E2', // Pastel Pink for unchecked buttons
+        'quiz-button-checked': '#F5F5F5', // Off-white background
+        'quiz-accent': '#007BFF', // Electric Blue for primary buttons
+        'quiz-highlight': '#FF6F61', // Coral Pink for header
+        'quiz-hover': '#39FF14', // Neon Green for hover states
+      },
+      textColor: {
+        'quiz-text': '#333333', // Dark gray for text
+        'quiz-accent': '#007BFF',
       },
       boxShadow: {
         'quiz-unchecked': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
         'quiz-unchecked-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-        'quiz-checked': '0 0 15px rgba(255, 255, 255, 0.1)',
+        'quiz-checked': '0 0 15px rgba(255, 20, 147, 0.3)',
       },
     },
   },

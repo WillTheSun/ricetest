@@ -36,15 +36,13 @@ export default function Quiz() {
 
     return (
         <div className="bg-quiz-background min-h-screen pb-20 text-quiz-text">
-            <header className="fixed top-0 left-0 right-0 bg-quiz-highlight text-white p-4 z-10 shadow-md transition-all duration-300 ease-in-out">
+            <header className="fixed top-0 left-0 right-0 bg-quiz-highlight text-white p-4 z-10 shadow-md">
                 <div className="max-w-4xl mx-auto flex justify-between items-center relative">
                     <h1 className="text-2xl font-bold md:absolute md:left-1/2 md:-translate-x-1/2 md:w-full md:text-center">
                         Rice Purity Test
                     </h1>
-                    <div className="ml-auto">
-                        <div className="bg-quiz-text text-quiz-background px-4 py-2 rounded-full font-bold">
-                            Score: {score} / {questions.length}
-                        </div>
+                    <div className="ml-auto bg-quiz-text text-quiz-background px-4 py-2 rounded-full font-bold">
+                        Score: {score} / {questions.length}
                     </div>
                 </div>
             </header>
@@ -63,8 +61,8 @@ export default function Quiz() {
                             className={`
                                 rounded-lg p-4 cursor-pointer transition-all duration-200
                                 ${checkedItems[index]
-                                    ? 'bg-quiz-background text-quiz-text shadow-quiz-checked'
-                                    : 'bg-quiz-text text-quiz-background shadow-quiz-unchecked hover:shadow-quiz-unchecked-hover'
+                                    ? 'bg-quiz-button-checked shadow-quiz-checked'
+                                    : 'bg-quiz-button-unchecked shadow-quiz-unchecked hover:shadow-quiz-unchecked-hover'
                                 }
                             `}
                             onClick={() => handleCheck(index)}
@@ -87,7 +85,7 @@ export default function Quiz() {
                 <div className="mt-8 flex justify-center">
                     <button
                         onClick={handleShare}
-                        className="bg-quiz-highlight text-white px-6 py-3 rounded-full font-bold shadow-md hover:bg-opacity-90 transition-all duration-200"
+                        className="bg-quiz-accent text-white px-6 py-3 rounded-full font-bold shadow-md hover:bg-quiz-hover transition-all duration-200"
                     >
                         Share My Score
                     </button>
