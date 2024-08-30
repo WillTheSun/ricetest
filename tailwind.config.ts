@@ -12,13 +12,13 @@ const config: Config = {
         'quiz-background': '#F5F5F5', // Off-white background
         'quiz-button-unchecked': '#FEE2E2', // Pastel Pink for unchecked buttons
         'quiz-button-checked': '#F5F5F5', // Off-white background
-        'quiz-accent': '#007BFF', // Electric Blue for primary buttons
+        'quiz-accent': '#A3C7FF', // Electric Blue for primary buttons
         'quiz-highlight': '#FF6F61', // Coral Pink for header
         'quiz-hover': '#39FF14', // Neon Green for hover states
       },
       textColor: {
         'quiz-text': '#333333', // Dark gray for text
-        'quiz-accent': '#007BFF',
+        'quiz-accent': '#007BFF', // Electric Blue for primary buttons
       },
       boxShadow: {
         'quiz-unchecked': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',

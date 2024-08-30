@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { questions } from './questions';
 
 export default function Quiz() {
     const [checkedItems, setCheckedItems] = useState<boolean[]>(new Array(questions.length).fill(false));
     const [score, setScore] = useState(0);
+    const [progress, setProgress] = useState(0);
+    const quizContainerRef = useRef<HTMLDivElement>(null);
 
     const handleCheck = (index: number) => {
         setCheckedItems(prev => {
@@ -19,6 +21,22 @@ export default function Quiz() {
         const newScore = checkedItems.filter(Boolean).length;
         setScore(newScore);
     }, [checkedItems]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (quizContainerRef.current) {
+                const { scrollTop, scrollHeight, clientHeight } = quizContainerRef.current;
+                const scrollPercentage = scrollTop / (scrollHeight - clientHeight);
+                setProgress(Math.min(scrollPercentage, 1));
+            }
+        };
+
+        const container = quizContainerRef.current;
+        if (container) {
+            container.addEventListener('scroll', handleScroll);
+            return () => container.removeEventListener('scroll', handleScroll);
+        }
+    }, []);
 
     const handleShare = async () => {
         if (navigator.share) {
@@ -34,8 +52,17 @@ export default function Quiz() {
         }
     };
 
+    const handleReset = () => {
+        setCheckedItems(new Array(questions.length).fill(false));
+        setScore(0);
+        setProgress(0);
+        if (quizContainerRef.current) {
+            quizContainerRef.current.scrollTop = 0;
+        }
+    };
+
     return (
-        <div className="bg-quiz-background min-h-screen pb-20 text-quiz-text">
+        <div className="bg-quiz-background min-h-screen text-quiz-text">
             <header className="fixed top-0 left-0 right-0 bg-quiz-highlight text-white p-4 z-10 shadow-md">
                 <div className="max-w-4xl mx-auto flex justify-between items-center relative">
                     <h1 className="text-2xl font-bold md:absolute md:left-1/2 md:-translate-x-1/2 md:w-full md:text-center">
@@ -47,7 +74,17 @@ export default function Quiz() {
                 </div>
             </header>
 
-            <main className="pt-24 px-4 max-w-2xl mx-auto">
+            <div className="fixed top-16 left-0 right-0 h-1 bg-quiz-text/20 z-10">
+                <div 
+                    className="h-full bg-quiz-accent transition-all duration-300 ease-out"
+                    style={{ width: `${progress * 100}%` }}
+                ></div>
+            </div>
+
+            <main 
+                ref={quizContainerRef}
+                className="pt-24 px-4 max-w-2xl mx-auto overflow-y-auto h-screen"
+            >
                 <div className="text-xs text-center mb-6 space-y-2 text-quiz-text/70">
                     <p>Welcome to the updated Rice Purity Test.</p>
                     <p>Click on every experience you&apos;ve had. MPS = Member of the Preferred Sex.</p>
@@ -82,12 +119,18 @@ export default function Quiz() {
                     ))}
                 </div>
 
-                <div className="mt-8 flex justify-center">
+                <div className="mt-8 mb-16 flex justify-center space-x-4">
                     <button
                         onClick={handleShare}
                         className="bg-quiz-accent text-white px-6 py-3 rounded-full font-bold shadow-md hover:bg-quiz-hover transition-all duration-200"
                     >
                         Share My Score
+                    </button>
+                    <button
+                        onClick={handleReset}
+                        className="bg-quiz-text text-quiz-background px-6 py-3 rounded-full font-bold shadow-md hover:bg-quiz-text/80 transition-all duration-200"
+                    >
+                        Reset Quiz
                     </button>
                 </div>
             </main>
