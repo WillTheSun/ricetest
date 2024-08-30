@@ -78,7 +78,7 @@ export default function Quiz() {
                         Rice Purity Test
                     </h1>
                     <div className="ml-auto bg-quiz-text text-quiz-background text-quiz-score px-2 rounded-full font-medium border-quiz-score border-white shadow-quiz-score">
-                        Score: {score} / 100
+                        {score} / 100
                     </div>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-quiz-text/20">
@@ -128,7 +128,6 @@ export default function Quiz() {
                 </div>
 
                 <div className="mt-8 mb-4 flex flex-col items-center space-y-4">
-                    {/* Updated score display */}
                     <div className="bg-quiz-highlight text-white p-3 rounded-lg text-center w-full">
                         <span className="text-xl font-bold">
                             {getLabel(score)} ({score} / {questions.length})
