@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { questions } from './questions';
+import { questions, labels } from './questions';
 
 export default function Quiz() {
     const [checkedItems, setCheckedItems] = useState<boolean[]>(new Array(questions.length).fill(false));
-    const [score, setScore] = useState(0);
+    const [score, setScore] = useState(100);
     const [progress, setProgress] = useState(0);
     const quizContainerRef = useRef<HTMLDivElement>(null);
 
@@ -18,7 +18,7 @@ export default function Quiz() {
     };
 
     useEffect(() => {
-        const newScore = checkedItems.filter(Boolean).length;
+        const newScore = 100 - checkedItems.filter(Boolean).length;
         setScore(newScore);
     }, [checkedItems]);
 
@@ -54,36 +54,44 @@ export default function Quiz() {
 
     const handleReset = () => {
         setCheckedItems(new Array(questions.length).fill(false));
-        setScore(0);
+        setScore(100);
         setProgress(0);
         if (quizContainerRef.current) {
             quizContainerRef.current.scrollTop = 0;
         }
     };
 
+    const getLabel = (score: number) => {
+        for (const { range, label } of labels) {
+            if (score >= range[0] && score <= range[1]) {
+                return label;
+            }
+        }
+        return "Unknown";
+    };
+
     return (
-        <div className="bg-quiz-background min-h-screen text-quiz-text">
-            <header className="fixed top-0 left-0 right-0 bg-quiz-highlight text-white p-4 z-10 shadow-md">
-                <div className="max-w-4xl mx-auto flex justify-between items-center relative">
-                    <h1 className="text-2xl font-bold md:absolute md:left-1/2 md:-translate-x-1/2 md:w-full md:text-center">
+        <div className="bg-quiz-background min-h-screen text-quiz-text font-quiz">
+            <header className="fixed top-0 left-0 right-0 bg-quiz-highlight text-white p-4 z-10 shadow-md flex flex-col">
+                <div className="max-w-4xl mx-auto flex justify-between items-center relative w-full">
+                    <h1 className="text-quiz-title font-bold tracking-quiz-title md:absolute md:left-1/2 md:-translate-x-1/2 md:w-full md:text-center">
                         Rice Purity Test
                     </h1>
-                    <div className="ml-auto bg-quiz-text text-quiz-background px-4 py-2 rounded-full font-bold">
-                        Score: {score} / {questions.length}
+                    <div className="ml-auto bg-quiz-text text-quiz-background text-quiz-score px-2 rounded-full font-medium border-quiz-score border-white shadow-quiz-score">
+                        Score: {score} / 100
                     </div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-quiz-text/20">
+                    <div 
+                        className="h-full bg-quiz-accent transition-all duration-300 ease-out"
+                        style={{ width: `${progress * 100}%` }}
+                    ></div>
                 </div>
             </header>
 
-            <div className="fixed top-16 left-0 right-0 h-1 bg-quiz-text/20 z-10">
-                <div 
-                    className="h-full bg-quiz-accent transition-all duration-300 ease-out"
-                    style={{ width: `${progress * 100}%` }}
-                ></div>
-            </div>
-
             <main 
                 ref={quizContainerRef}
-                className="pt-24 px-4 max-w-2xl mx-auto overflow-y-auto h-screen"
+                className="pt-24 px-4 md:px-8 lg:px-16 max-w-full mx-auto overflow-y-auto h-screen"
             >
                 <div className="text-xs text-center mb-6 space-y-2 text-quiz-text/70">
                     <p>Welcome to the updated Rice Purity Test.</p>
@@ -119,19 +127,29 @@ export default function Quiz() {
                     ))}
                 </div>
 
-                <div className="mt-8 mb-16 flex justify-center space-x-4">
-                    <button
-                        onClick={handleShare}
-                        className="bg-quiz-accent text-white px-6 py-3 rounded-full font-bold shadow-md hover:bg-quiz-hover transition-all duration-200"
-                    >
-                        Share My Score
-                    </button>
-                    <button
-                        onClick={handleReset}
-                        className="bg-quiz-text text-quiz-background px-6 py-3 rounded-full font-bold shadow-md hover:bg-quiz-text/80 transition-all duration-200"
-                    >
-                        Reset Quiz
-                    </button>
+                <div className="mt-8 mb-4 flex flex-col items-center space-y-4">
+                    {/* Updated score display */}
+                    <div className="bg-quiz-highlight text-white p-3 rounded-lg text-center w-full">
+                        <span className="text-xl font-bold">
+                            {getLabel(score)} ({score} / {questions.length})
+                        </span>
+                    </div>
+
+                    {/* Existing buttons */}
+                    <div className="flex justify-center space-x-4">
+                        <button
+                            onClick={handleShare}
+                            className="bg-quiz-accent text-white px-6 py-3 rounded-full font-bold shadow-md hover:bg-quiz-hover transition-all duration-200"
+                        >
+                            Share My Score
+                        </button>
+                        <button
+                            onClick={handleReset}
+                            className="bg-quiz-text text-quiz-background px-6 py-3 rounded-full font-bold shadow-md hover:bg-quiz-text/80 transition-all duration-200"
+                        >
+                            Reset Quiz
+                        </button>
+                    </div>
                 </div>
             </main>
         </div>

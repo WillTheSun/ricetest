@@ -19,11 +19,26 @@ const config: Config = {
       textColor: {
         'quiz-text': '#333333', // Dark gray for text
         'quiz-accent': '#007BFF', // Electric Blue for primary buttons
+        'quiz-title': '#F0F0F0', // New light gray color for the title
       },
       boxShadow: {
         'quiz-unchecked': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
         'quiz-unchecked-hover': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
         'quiz-checked': '0 0 15px rgba(255, 20, 147, 0.3)',
+        'quiz-score': '0 2px 4px rgba(0, 0, 0, 0.1)',
+      },
+      fontFamily: {
+        'quiz': ['Poppins', 'Nunito', 'Montserrat', 'sans-serif'],
+      },
+      fontSize: {
+        'quiz-title': '1.75rem', // 28px
+        'quiz-score': '1.0rem', // 12px (reduced from 1rem)
+      },
+      letterSpacing: {
+        'quiz-title': '0.5px',
+      },
+      borderWidth: {
+        'quiz-score': '0.5px', // Reduced from 1px
       },
     },
   },

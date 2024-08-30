@@ -66,6 +66,7 @@ export const questions = [
     "Been convicted of a felony?",
     "Committed an act of vandalism?",
     "Had sexual intercourse?",
+    "?",
     "Had sexual intercourse three or more times in one night?",
     "Had sexual intercourse 10 or more times?",
     "Had sexual intercourse in four or more positions?",
@@ -99,6 +100,19 @@ export const questions = [
     "Committed an act of incest?",
     "Engaged in bestiality?"
 ];
+
+export const labels = [
+    { range: [0, 14], label: "Choo Choo trainwreck" },
+    { range: [15, 29], label: "Community Mattress" },
+    { range: [30, 43], label: "Neighborhood Bike" },
+    { range: [44, 55], label: "team thot" },
+    { range: [56, 68], label: "Seasoned Slut" },
+    { range: [69], label: "Nicee" },
+    { range: [70, 84], label: "Somebody will match your Freak" },
+    { range: [85, 95], label: "Beginner Bop" },
+    { range: [96, 100], label: "Goody Two-Shoes" }
+];
+
 
 const innocenceTestQuestions = [
     "been on a date 💕",
