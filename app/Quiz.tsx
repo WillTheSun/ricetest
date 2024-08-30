@@ -37,12 +37,11 @@ export default function Quiz() {
     return (
         <div className="bg-quiz-background min-h-screen pb-20 text-quiz-text">
             <header className="fixed top-0 left-0 right-0 bg-quiz-highlight text-white p-4 z-10 shadow-md transition-all duration-300 ease-in-out">
-                <div className="max-w-4xl mx-auto flex justify-between items-center">
-                    <div className="w-1/3"></div> {/* Spacer */}
-                    <h1 className="text-2xl font-bold absolute left-1/2 transform -translate-x-1/2">
+                <div className="max-w-4xl mx-auto flex justify-between items-center relative">
+                    <h1 className="text-2xl font-bold md:absolute md:left-1/2 md:-translate-x-1/2 md:w-full md:text-center">
                         Rice Purity Test
                     </h1>
-                    <div className="w-1/3 flex justify-end">
+                    <div className="ml-auto">
                         <div className="bg-quiz-text text-quiz-background px-4 py-2 rounded-full font-bold">
                             Score: {score} / {questions.length}
                         </div>
@@ -51,15 +50,11 @@ export default function Quiz() {
             </header>
 
             <main className="pt-24 px-4 max-w-2xl mx-auto">
-                <p className="text-center italic mb-6">
-                    The Purity Test has long been a tradition, bridging the gap between O-week and the real college experience at Rice. It&apos;s a voluntary way for O-week groups to connect and for students to reflect on how their experiences evolve throughout their time in college.
-                </p>
-                <p className="text-center italic mb-6">
-                    Click on every experience you&apos;ve had. MPS refers to Member of the Preferred Sex.
-                </p>
-                <p className="text-center italic mb-6">
-                    Note: This is not a bucket list. Attempting to complete every item on this test could have serious, even fatal, consequences.
-                </p>
+                <div className="text-xs text-center mb-6 space-y-2 text-quiz-text/70">
+                    <p>Welcome to the updated Rice Purity Test.</p>
+                    <p>Click on every experience you&apos;ve had. MPS = Member of the Preferred Sex.</p>
+                    <p>Note: This is not a bucket list. Attempting to check off every item could lead to serious, even fatal, consequences.</p>
+                </div>
 
                 <div className="space-y-4">
                     {questions.map((question, index) => (
